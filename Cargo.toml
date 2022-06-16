@@ -1,0 +1,20 @@
+[package]
+name = "femark"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# ammonia = {version = "3.2.0", default-features=false}
+once_cell = {version = "1.12.0"}
+pulldown-cmark = {version = "0.9.1", default-features = false}
+syntect = { version = "4.6", default-features = false, features = ["default-fancy"] }
+wasm-bindgen = "0.2.79"
+
+# make the release profile compile slower but be smaller and run faster
+[profile.release]
+lto = true
+opt-level = 'z'

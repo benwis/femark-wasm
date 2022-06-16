@@ -1,0 +1,31 @@
+{
+    "name": "@benwis/femark",
+    "version": "0.0.1",
+    "license": "MIT",
+    "scripts": {
+      "build": "npm run build:browser && npm run build:node",
+      "build:browser": "wasm-pack build --target web --release --out-dir ./build/browser && rimraf ./build/browser/package.json",
+      "build:node": "wasm-pack build --target nodejs --release --out-dir ./build/node && rimraf ./build/node/package.json",
+      "dev": "cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target web --out-dir ./build/browser && wasm-pack build --target nodejs --out-dir ./build/node\""
+    },
+    "sideEffects": false,
+    "files": [
+      "build"
+    ],
+    "types": "./build/browser/femark.d.ts",
+    "exports": {
+      ".": {
+        "browser": "./build/browser/femark.js",
+        "deno": "./build/browser/femark.js",
+        "node": "./build/node/femark.js"
+      },
+      "./binary.wasm": {
+        "browser": "./build/browser/femark_bg.wasm",
+        "deno": "./build/browser/femark.js",
+        "node": "./noop.js"
+      }
+    },
+    "devDependencies": {
+      "rimraf": "^3.0.2"
+    }
+  }

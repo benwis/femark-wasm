@@ -6,7 +6,8 @@
         "build": "npm run build:browser && npm run build:node",
         "build:browser": "wasm-pack build --target web --release --out-dir ./build/browser && rimraf ./build/browser/package.json",
         "build:node": "wasm-pack build --target nodejs --release --out-dir ./build/node && rimraf ./build/node/package.json",
-        "dev": "cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target web --out-dir ./build/browser && wasm-pack build --target nodejs --out-dir ./build/node\""
+        "dev": "cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target web --out-dir ./build/browser && wasm-pack build --target nodejs --out-dir ./build/node\"",
+        "prepublish": "npm run build && rimraf ./build/node/.gitignore && rimraf ./build/browser/.gitignore"
     },
     "sideEffects": false,
     "files": [

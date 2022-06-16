@@ -3,26 +3,21 @@
     "version": "0.0.3",
     "license": "MIT",
     "scripts": {
-        "build": "npm run build:browser && npm run build:node",
-        "build:browser": "wasm-pack build --target web --release --out-dir ./build/browser && rimraf ./build/browser/package.json",
+        "build": "npm run build:node",
         "build:node": "wasm-pack build --target nodejs --release --out-dir ./build/node && rimraf ./build/node/package.json",
-        "dev": "cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target web --out-dir ./build/browser && wasm-pack build --target nodejs --out-dir ./build/node\"",
+        "dev": "cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target nodejs --out-dir ./build/node\"",
         "prepublish": "npm run build && rimraf ./build/node/.gitignore && rimraf ./build/browser/.gitignore"
     },
     "sideEffects": false,
     "files": [
         "build"
     ],
-    "types": "./build/browser/femark.d.ts",
+    "types": "./build/node/femark.d.ts",
     "exports": {
         ".": {
-            "browser": "./build/browser/femark.js",
-            "deno": "./build/browser/femark.js",
             "node": "./build/node/femark.js"
         },
         "./binary.wasm": {
-            "browser": "./build/browser/femark_bg.wasm",
-            "deno": "./build/browser/femark.js",
             "node": "./noop.js"
         }
     },

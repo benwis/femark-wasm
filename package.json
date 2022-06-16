@@ -1,6 +1,6 @@
 {
     "name": "@benwis/femark",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "license": "MIT",
     "scripts": {
         "build": "npm run build:browser && npm run build:node",
